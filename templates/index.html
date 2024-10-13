@@ -37,14 +37,14 @@
         const loader = new THREE.GLTFLoader();
         loader.load('/static/models/island.glb', function (gltf) {
             const model = gltf.scene;
-            model.scale.set(1, 1, 1); // Scale the model
+            model.scale.set(10, 10, 10); // Scale the model
             scene.add(model);
         }, undefined, function (error) {
             console.error('Error loading the model:', error);
         });
 
         // Set camera position
-        camera.position.z = 5;
+        camera.position.z = 30;
 
         // Animation loop
         function animate() {

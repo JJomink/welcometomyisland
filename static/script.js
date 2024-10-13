@@ -1,6 +1,3 @@
-// script.js
-
-// 기본 씬 설정
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
@@ -8,15 +5,15 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // 조명 추가
-const ambientlight = new THREE.AmbientLight(0xffffff, 1);
-scene.add(light);
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // 방향광 추가
 directionalLight.position.set(1, 1, 1).normalize(); // 방향 설정
 scene.add(directionalLight);
 
 // GLTFLoader를 사용하여 GLB 모델 로드
 const loader = new THREE.GLTFLoader();
-loader.load('/static/models/island.glb', (gltf) {
+loader.load('/static/models/island.glb', (gltf) => {
     const model = gltf.scene;
     model.scale.set(10, 10, 10);
     scene.add(model);
@@ -69,8 +66,8 @@ function animate() {
 }
 
 // 카메라 위치 설정
-camera.position.set = (0,2,5);
-camera.lookAt(gltf.scene.position);
+camera.position.set(0,2,5);
+camera.lookAt(0,0,0);
 
 // 마우스 클릭 처리
 window.addEventListener('click', (event) => {
