@@ -69,9 +69,8 @@ function animate() {
 }
 
 // 카메라 위치 설정
-camera.position.z = 5;
+camera.position.set = (0,2,5);
 camera.lookAt(gltf.scene.position);
-
 
 // 마우스 클릭 처리
 window.addEventListener('click', (event) => {
