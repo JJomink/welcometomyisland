@@ -3,9 +3,9 @@
 // 기본 씬 설정
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('container').appendChild(renderer.domElement);
+document.body.appendChild(renderer.domElement);
 
 // 조명 추가
 const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -14,8 +14,9 @@ scene.add(light);
 
 // GLTFLoader를 사용하여 GLB 모델 로드
 const loader = new THREE.GLTFLoader();
-loader.load('/static/island.glb', (gltf) => {
+loader.load('/static/models/island.glb', (gltf) {
     const model = gltf.scene;
+    model.scale.set(10, 10, 10); 
     model.position.set(0, 0, 0); // 모델 위치 조정
     scene.add(model);
 
@@ -51,18 +52,23 @@ function animate() {
     const time = Date.now() * 0.002; // 시간 기반 애니메이션
 
     // 파도 효과: 각 정점의 Z 위치 조정
-    waveGeometry.vertices.forEach((vertex) => {
-        vertex.z = Math.sin(vertex.x + time) * 0.5; // Y 방향으로 파도 효과
-    });
+    const positionAttribute = waveGeometry.getAttribute('position');
+    const positions = positionAttribute.array;
+
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i + 2] = Math.sin(positions[i] + time) * 0.5; // Z 방향으로 파도 효과
+    }
 
     // 정점 변경 사항 적용
-    waveGeometry.verticesNeedUpdate = true;
+    positionAttribute.needsUpdate = true;
 
     renderer.render(scene, camera);
 }
 
 // 카메라 위치 설정
 camera.position.z = 5;
+camera.lookAt(gltf.scene.position);
+
 
 // 마우스 클릭 처리
 window.addEventListener('click', (event) => {
