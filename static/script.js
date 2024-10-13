@@ -8,15 +8,18 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // 조명 추가
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(5, 5, 5).normalize();
+const ambientlight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // 방향광 추가
+directionalLight.position.set(1, 1, 1).normalize(); // 방향 설정
+scene.add(directionalLight);
 
 // GLTFLoader를 사용하여 GLB 모델 로드
 const loader = new THREE.GLTFLoader();
 loader.load('/static/models/island.glb', (gltf) {
     const model = gltf.scene;
-    model.scale.set(10, 10, 10); 
+    model.scale.set(10, 10, 10);
+    scene.add(model);
     model.position.set(0, 0, 0); // 모델 위치 조정
     scene.add(model);
 
