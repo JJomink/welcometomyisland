@@ -14,7 +14,7 @@ scene.add(light);
 
 // GLTFLoader를 사용하여 GLB 모델 로드
 const loader = new THREE.GLTFLoader();
-loader.load('island.glb', (gltf) => {
+loader.load('/static/island.glb', (gltf) => {
     const model = gltf.scene;
     model.position.set(0, 0, 0); // 모델 위치 조정
     scene.add(model);
