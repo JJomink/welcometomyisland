@@ -1,0 +1,13 @@
+{
+  "name": "my-web-project",
+  "version": "1.0.0",
+  "description": "A simple Node.js app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "three": "^0.169.0",
+    "three-gltf-loader": "^1.111.0"
+  }
+}

@@ -1,0 +1,15 @@
+/* 화면에 3D 씬이 꽉 차도록 설정 */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
